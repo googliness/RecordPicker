@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body class="container">
+        <h2 class="text-center mb-3">Top 250 movies of all time</h2>
+        {% if sync_resp %}
+        <div class="row mx-0 mb-1 justify-content-center">
+            <div class="m-1 p-2 col-8 alert alert-success">
+                {{ sync_resp }}
+            </div>
+        </div>
+        {% endif %}
+        {% if movies %}
+        <div class="row mx-0 justify-content-center">
+            <div class="m-1 p-2 col-8 alert alert-secondary">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="/sync" class="ml-3">Sync</a>
+                    <a href="/logout" class="mr-3">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0 mt-1 justify-content-center">
+            {% for movie in movies %}
+            <div class="m-1 p-2 col-8 alert alert-primary">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="d-inline">
+                            <img class="img-thumbnail" alt="image not found" width="80" src="{{ movie.poster }}">
+                        </div>
+                        <div class="d-inline">
+                            <b>{{ forloop.counter }}. {{ movie.title }} ({{ movie.year }})</b>
+                        </div>
+                    </div>
+                    <span class="mr-2">{{ movie.rated }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </body>
+</html>
